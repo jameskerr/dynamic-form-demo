@@ -23,28 +23,22 @@ class ExpensesController < ApplicationController
   # POST /expenses or /expenses.json
   def create
     @expense = Expense.new(expense_params)
-
-    respond_to do |format|
-      if @expense.save
-        format.html { redirect_to expense_url(@expense), notice: "Expense was successfully created." }
-        format.json { render :show, status: :created, location: @expense }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    
+    if params[:commit] == "refresh"
+      render :new, status: :unprocessable_entity
+    elsif @expense.save
+      redirect_to expense_url(@expense), notice: "Expense was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /expenses/1 or /expenses/1.json
   def update
-    respond_to do |format|
-      if @expense.update(expense_params)
-        format.html { redirect_to expense_url(@expense), notice: "Expense was successfully updated." }
-        format.json { render :show, status: :ok, location: @expense }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    if @expense.update(expense_params)
+      redirect_to expense_url(@expense), notice: "Expense was successfully updated." 
+    else
+      render :edit, status: :unprocessable_entity 
     end
   end
 
@@ -75,7 +69,8 @@ class ExpensesController < ApplicationController
             :interval, 
             :amount,
             :frequency,
-            :repeats
+            :repeats,
+            :started_at
           ]
         )
     end

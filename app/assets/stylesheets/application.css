@@ -15,7 +15,7 @@
  */
 
 html {
-    background: pink;
+    background: #ddd;
 }
 
 body {
@@ -36,11 +36,12 @@ h1,h2,h3,h4 {
 }
 
 .card {
-    border-style: solid;
     max-width: 25rem;
     margin-inline: auto;
     padding: 1em;
     background: white;
+    box-shadow: 0 1px 5px hsl(0deg, 0%, 60%);
+    border-radius: 3px;
 }
 
 form {
@@ -66,7 +67,7 @@ label:has(input) {
     gap: 0.5em;
 }
 
-input:not([type=checkbox]) {
+input:not([type=checkbox]),select {
     width: 100%;
     font: inherit;
     padding: 0.3em 0.5em;
@@ -92,4 +93,8 @@ input[type=submit] {
     border: none;
     border-radius: 3px;
 
+}
+
+.hidden {
+    display: none;
 }
