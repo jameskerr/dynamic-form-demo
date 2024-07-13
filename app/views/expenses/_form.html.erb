@@ -1,0 +1,48 @@
+<%= form_with(model: expense) do |form| %>
+  <% if expense.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
+      <ul>
+        <% expense.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <%= form.fields_for :schedules do |schedule| %>
+    <div class="field">
+      <%= schedule.label :amount %>
+      <%= schedule.number_field :amount %>
+    </div>
+    <%= schedule.label :repeats do  %>
+      <%= schedule.check_box :repeats %> Repeats
+    <% end  %>
+    <% if schedule.object.repeats? %>
+      <div class="field">
+        <%= schedule.label :interval %>
+        <%= schedule.number_field :interval  %>
+      </div>
+      <div class="field">
+        <%= schedule.label :frequency %>
+        <%= schedule.select :frequency, [
+        ["Week".pluralize(schedule.object.interval), "week"], 
+        ["Month", "month"], 
+        ["Year", "year"]
+        ] %>
+      </div>
+    <% else %>
+      <div class="field">
+        <%= schedule.label :started_at, "Date" %>
+        <%= schedule.date_field :started_at%>
+      </div>
+    <% end %>
+  <% end %>
+  <br />
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

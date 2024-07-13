@@ -1,0 +1,10 @@
+<div>
+  <%= link_to "Back to expenses", expenses_path %>
+</div>
+<div class="region">
+  <article class="card">
+    <h1>New Expense</h1>
+    <br />
+    <%= render "form", expense: @expense %>
+  </article>
+</div>

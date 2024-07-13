@@ -1,0 +1,12 @@
+<div id="<%= dom_id expense %>">
+  <p>
+    <strong>Name:</strong>
+    <%= expense.name %>
+  </p>
+  <% expense.schedules.each do |schedule| %>
+    <p>
+      <strong>Schedule:</strong>
+      <%= schedule.amount.format %> every <%= schedule.interval %> <%= schedule.frequency.pluralize(schedule.interval) %>
+    </p>
+  <% end %>
+</div>
