@@ -23,9 +23,8 @@ class ExpensesController < ApplicationController
   # POST /expenses or /expenses.json
   def create
     @expense = Expense.new(expense_params)
-    if params["commit"] == "refresh"
-      render :new, status: :unprocessable_entity
-    elsif @expense.save
+    
+    if @expense.save
       redirect_to expense_url(@expense), notice: "Expense was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -69,7 +68,8 @@ class ExpensesController < ApplicationController
             :amount,
             :frequency,
             :repeats,
-            :started_at
+            :started_at,
+            :by_monthday => [],
           ]
         )
     end

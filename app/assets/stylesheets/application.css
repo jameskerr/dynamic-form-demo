@@ -98,3 +98,17 @@ input[type=submit] {
 .hidden {
     display: none;
 }
+
+.cluster {
+    display: flex;
+    gap: 0.5ch;
+    flex-wrap: wrap;
+}
+
+.flow > * + * {
+    margin-block-start: 2em;
+}
+
+.text-center {
+    text-align: center;
+}
