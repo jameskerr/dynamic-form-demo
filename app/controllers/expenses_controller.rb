@@ -24,7 +24,9 @@ class ExpensesController < ApplicationController
   def create
     @expense = Expense.new(expense_params)
     
-    if @expense.save
+    if params["commit"] == "refresh"
+      render :new, status: :unprocessable_entity
+    elsif @expense.save
       redirect_to expense_url(@expense), notice: "Expense was successfully created."
     else
       render :new, status: :unprocessable_entity
