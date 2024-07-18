@@ -24,3 +24,6 @@ data: {controller: "form", action: "change->form#refresh"}
 <meta name="turbo-refresh-method" content="morph">
 <meta name="turbo-refresh-scroll" content="preserve">
 ```
+
+Then hide button
+Then show diff
